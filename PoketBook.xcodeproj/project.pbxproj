@@ -6,6 +6,19 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		1E8216C42D1D2EBF00412C0F /* RxBlocking in Frameworks */ = {isa = PBXBuildFile; productRef = 1E8216C32D1D2EBF00412C0F /* RxBlocking */; };
+		1E8216C62D1D2EBF00412C0F /* RxBlocking-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 1E8216C52D1D2EBF00412C0F /* RxBlocking-Dynamic */; };
+		1E8216C82D1D2EBF00412C0F /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 1E8216C72D1D2EBF00412C0F /* RxCocoa */; };
+		1E8216CA2D1D2EBF00412C0F /* RxCocoa-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 1E8216C92D1D2EBF00412C0F /* RxCocoa-Dynamic */; };
+		1E8216CC2D1D2EBF00412C0F /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 1E8216CB2D1D2EBF00412C0F /* RxRelay */; };
+		1E8216CE2D1D2EBF00412C0F /* RxRelay-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 1E8216CD2D1D2EBF00412C0F /* RxRelay-Dynamic */; };
+		1E8216D02D1D2EBF00412C0F /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1E8216CF2D1D2EBF00412C0F /* RxSwift */; };
+		1E8216D22D1D2EBF00412C0F /* RxSwift-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 1E8216D12D1D2EBF00412C0F /* RxSwift-Dynamic */; };
+		1E8216D42D1D2EBF00412C0F /* RxTest in Frameworks */ = {isa = PBXBuildFile; productRef = 1E8216D32D1D2EBF00412C0F /* RxTest */; };
+		1E8216D62D1D2EBF00412C0F /* RxTest-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 1E8216D52D1D2EBF00412C0F /* RxTest-Dynamic */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		1EAE654E2D1CE9D10000A52C /* PoketBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PoketBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -36,6 +49,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E8216D22D1D2EBF00412C0F /* RxSwift-Dynamic in Frameworks */,
+				1E8216D42D1D2EBF00412C0F /* RxTest in Frameworks */,
+				1E8216CC2D1D2EBF00412C0F /* RxRelay in Frameworks */,
+				1E8216CA2D1D2EBF00412C0F /* RxCocoa-Dynamic in Frameworks */,
+				1E8216CE2D1D2EBF00412C0F /* RxRelay-Dynamic in Frameworks */,
+				1E8216C82D1D2EBF00412C0F /* RxCocoa in Frameworks */,
+				1E8216C42D1D2EBF00412C0F /* RxBlocking in Frameworks */,
+				1E8216C62D1D2EBF00412C0F /* RxBlocking-Dynamic in Frameworks */,
+				1E8216D62D1D2EBF00412C0F /* RxTest-Dynamic in Frameworks */,
+				1E8216D02D1D2EBF00412C0F /* RxSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +101,16 @@
 			);
 			name = PoketBook;
 			packageProductDependencies = (
+				1E8216C32D1D2EBF00412C0F /* RxBlocking */,
+				1E8216C52D1D2EBF00412C0F /* RxBlocking-Dynamic */,
+				1E8216C72D1D2EBF00412C0F /* RxCocoa */,
+				1E8216C92D1D2EBF00412C0F /* RxCocoa-Dynamic */,
+				1E8216CB2D1D2EBF00412C0F /* RxRelay */,
+				1E8216CD2D1D2EBF00412C0F /* RxRelay-Dynamic */,
+				1E8216CF2D1D2EBF00412C0F /* RxSwift */,
+				1E8216D12D1D2EBF00412C0F /* RxSwift-Dynamic */,
+				1E8216D32D1D2EBF00412C0F /* RxTest */,
+				1E8216D52D1D2EBF00412C0F /* RxTest-Dynamic */,
 			);
 			productName = PoketBook;
 			productReference = 1EAE654E2D1CE9D10000A52C /* PoketBook.app */;
@@ -107,6 +140,9 @@
 			);
 			mainGroup = 1EAE65452D1CE9D10000A52C;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				1EAE65682D1CED380000A52C /* XCRemoteSwiftPackageReference "RxSwift" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 1EAE654F2D1CE9D10000A52C /* Products */;
 			projectDirPath = "";
@@ -145,6 +181,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = BQ384VD7Z8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PoketBook/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -172,6 +209,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = BQ384VD7Z8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PoketBook/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -333,6 +371,70 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		1EAE65682D1CED380000A52C /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.8.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1E8216C32D1D2EBF00412C0F /* RxBlocking */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1EAE65682D1CED380000A52C /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxBlocking;
+		};
+		1E8216C52D1D2EBF00412C0F /* RxBlocking-Dynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1EAE65682D1CED380000A52C /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = "RxBlocking-Dynamic";
+		};
+		1E8216C72D1D2EBF00412C0F /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1EAE65682D1CED380000A52C /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		1E8216C92D1D2EBF00412C0F /* RxCocoa-Dynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1EAE65682D1CED380000A52C /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = "RxCocoa-Dynamic";
+		};
+		1E8216CB2D1D2EBF00412C0F /* RxRelay */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1EAE65682D1CED380000A52C /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxRelay;
+		};
+		1E8216CD2D1D2EBF00412C0F /* RxRelay-Dynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1EAE65682D1CED380000A52C /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = "RxRelay-Dynamic";
+		};
+		1E8216CF2D1D2EBF00412C0F /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1EAE65682D1CED380000A52C /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+		1E8216D12D1D2EBF00412C0F /* RxSwift-Dynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1EAE65682D1CED380000A52C /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = "RxSwift-Dynamic";
+		};
+		1E8216D32D1D2EBF00412C0F /* RxTest */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1EAE65682D1CED380000A52C /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxTest;
+		};
+		1E8216D52D1D2EBF00412C0F /* RxTest-Dynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1EAE65682D1CED380000A52C /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = "RxTest-Dynamic";
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 1EAE65462D1CE9D10000A52C /* Project object */;
 }
