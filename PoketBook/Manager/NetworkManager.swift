@@ -1,34 +1,55 @@
 import Foundation
+import RxSwift
 
-class NetworkManager {
+final class NetworkManager {
+    // MARK: - Singleton Instance
     static let shared = NetworkManager()
+    
     private init() {}
-
-    func fetchPokemonList(limit: Int, offset: Int, completion: @escaping (Result<PokemonListResponse, Error>) -> Void) {
-        let urlString = "https://pokeapi.co/api/v2/pokemon?limit=\(limit)&offset=\(offset)"
-        guard let url = URL(string: urlString) else {
-            completion(.failure(NSError(domain: "Invalid URL", code: -1, userInfo: nil)))
-            return
-        }
-        
-        let task = URLSession.shared.dataTask(with: url) { data, _, error in
-            if let error = error {
-                completion(.failure(error))
-                return
+    
+    // MARK: - Fetch Method
+    func fetch<T: Decodable>(url: URL) -> Single<T> {
+        return Single.create { single in
+            let task = URLSession.shared.dataTask(with: url) { data, response, error in
+                // Handle errors
+                if let error = error {
+                    single(.failure(error))
+                    return
+                }
+                
+                // Check HTTP response status code
+                guard let httpResponse = response as? HTTPURLResponse, 200..<300 ~= httpResponse.statusCode else {
+                    single(.failure(NetworkError.invalidResponse))
+                    return
+                }
+                
+                // Decode the response data
+                guard let data = data else {
+                    single(.failure(NetworkError.noData))
+                    return
+                }
+                
+                do {
+                    let decodedData = try JSONDecoder().decode(T.self, from: data)
+                    single(.success(decodedData))
+                } catch {
+                    single(.failure(NetworkError.decodingFailed(error)))
+                }
             }
             
-            guard let data = data else {
-                completion(.failure(NSError(domain: "No Data", code: -1, userInfo: nil)))
-                return
-            }
+            task.resume()
             
-            do {
-                let response = try JSONDecoder().decode(PokemonListResponse.self, from: data)
-                completion(.success(response))
-            } catch {
-                completion(.failure(error))
-            }
+            return Disposables.create { task.cancel() }
         }
-        task.resume()
     }
+}
+
+// MARK: - NetworkError Definition
+enum NetworkError: Error {
+    case invalidResponse
+    case noData
+    case decodingFailed(Error)
+    case invalidURL
+    case decodingError
+    case requestFailed
 }
