@@ -8,7 +8,7 @@ class PokemonCollectionViewCell: UICollectionViewCell {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit  // 이미지를 정사각형에 맞춤
         imageView.clipsToBounds = true
-        imageView.backgroundColor = .white  // 하얀색 배경 설정
+        imageView.backgroundColor = UIColor.mainRed  // 하얀색 배경 설정
         imageView.layer.cornerRadius = 10   // 모서리 둥글게
         imageView.layer.borderColor = UIColor.black.cgColor
         imageView.layer.borderWidth = 2
@@ -57,7 +57,10 @@ class PokemonCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Configuration
     func configure(with pokemon: Pokemon, id: Int) {
-        nameLabel.text = pokemon.name
+        DispatchQueue.main.async {
+            self.nameLabel.text = pokemon.koreanName
+        }
+        
         if let url = URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/\(id).png") {
             imageView.load(url: url)
         }

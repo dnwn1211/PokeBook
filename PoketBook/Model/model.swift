@@ -11,7 +11,11 @@ struct PokemonListResponse: Decodable {
 struct Pokemon: Decodable {
     let name: String          // 포켓몬 이름
     let url: String           // 포켓몬 상세 정보 URL
-//    let imageURL: String
+    
+    // 한국어 이름을 반환하는 계산 프로퍼티
+    var koreanName: String {
+        return PokemonTranslator.getKoreanName(for: name)
+    }
 }
 
 // MARK: - 포켓몬 디테일 API 응답 구조

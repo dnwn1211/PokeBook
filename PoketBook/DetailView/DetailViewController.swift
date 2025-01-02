@@ -7,7 +7,10 @@ final class DetailViewController: UIViewController {
     // MARK: - UI Components
     private lazy var cardView: UIView = {
         let view = UIView()
-        view.backgroundColor = .white
+        
+        // darkRed 색상으로 배경 설정
+        view.backgroundColor = UIColor(red: 120/255, green: 30/255, blue: 30/255, alpha: 1.0)
+        
         view.layer.cornerRadius = 16
         view.layer.shadowColor = UIColor.black.cgColor
         view.layer.shadowOpacity = 0.1
@@ -15,6 +18,7 @@ final class DetailViewController: UIViewController {
         view.layer.shadowRadius = 8
         return view
     }()
+
 
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
@@ -64,10 +68,14 @@ final class DetailViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(red: 245/255, green: 245/255, blue: 235/255, alpha: 1.0)
+        
+        // mainRed 색상으로 배경색 변경
+        view.backgroundColor = UIColor(red: 190/255, green: 30/255, blue: 40/255, alpha: 1.0)
+        
         setupUI()
         bindViewModel()
     }
+
 
     private func setupUI() {
         // Add card view to main view

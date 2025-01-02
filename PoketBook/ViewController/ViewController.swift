@@ -19,8 +19,16 @@ final class MainViewController: UIViewController {
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(PokemonCollectionViewCell.self, forCellWithReuseIdentifier: PokemonCollectionViewCell.identifier)
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = UIColor.mainRed
         return collectionView
+    }()
+    
+    // MARK: - UI Components
+    private let pokemonBallImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "pokemonBall") // pokemonBall 이미지를 설정하세요.
+        imageView.contentMode = .scaleAspectFit // 이미지 비율 유지
+        return imageView
     }()
     
     // MARK: - Lifecycle
@@ -28,7 +36,7 @@ final class MainViewController: UIViewController {
         super.viewDidLoad()
         
         // 배경색을 빨간색으로 설정
-        view.backgroundColor = .red
+        view.backgroundColor = UIColor.mainRed
         
         setupUI()
         bindViewModel()
@@ -36,10 +44,23 @@ final class MainViewController: UIViewController {
     }
     
     private func setupUI() {
+        // pokemonBallImageView를 view에 추가
+        view.addSubview(pokemonBallImageView)
+        
+        // Auto Layout 설정
+        pokemonBallImageView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            pokemonBallImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10), // 상단 여백
+            pokemonBallImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor), // 가로 중앙
+            pokemonBallImageView.widthAnchor.constraint(equalToConstant: 100), // 이미지 크기 설정
+            pokemonBallImageView.heightAnchor.constraint(equalToConstant: 100) // 이미지 크기 설정
+        ])
+        
+        // collectionView를 view에 추가
         view.addSubview(collectionView)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
+            collectionView.topAnchor.constraint(equalTo: pokemonBallImageView.bottomAnchor, constant: 16), // pokemonBall 아래에 위치
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
@@ -50,7 +71,8 @@ final class MainViewController: UIViewController {
         // 기존 데이터 바인딩
         viewModel.pokemonList
             .bind(to: collectionView.rx.items(cellIdentifier: PokemonCollectionViewCell.identifier, cellType: PokemonCollectionViewCell.self)) { index, pokemon, cell in
-                cell.configure(with: pokemon, id: index + 1)
+                // 셀에 데이터를 전달
+                cell.configure(with: pokemon, id: index + 1)  // 'pokemon.koreanName'을 표시할 수 있도록
             }
             .disposed(by: disposeBag)
         
@@ -85,5 +107,4 @@ final class MainViewController: UIViewController {
             })
             .disposed(by: disposeBag)
     }
-
 }
