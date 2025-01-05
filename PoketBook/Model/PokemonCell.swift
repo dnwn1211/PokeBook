@@ -1,4 +1,5 @@
 import UIKit
+import Kingfisher
 
 class PokemonCollectionViewCell: UICollectionViewCell {
     static let identifier = "PokemonCollectionViewCell"
@@ -8,7 +9,7 @@ class PokemonCollectionViewCell: UICollectionViewCell {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit  // 이미지를 정사각형에 맞춤
         imageView.clipsToBounds = true
-        imageView.backgroundColor = UIColor.mainRed  // 하얀색 배경 설정
+        imageView.backgroundColor = .white // 하얀색 배경 설정
         imageView.layer.cornerRadius = 10   // 모서리 둥글게
         imageView.layer.borderColor = UIColor.black.cgColor
         imageView.layer.borderWidth = 2
@@ -62,19 +63,7 @@ class PokemonCollectionViewCell: UICollectionViewCell {
         }
         
         if let url = URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/\(id).png") {
-            imageView.load(url: url)
-        }
-    }
-}
-
-extension UIImageView {
-    func load(url: URL) {
-        DispatchQueue.global().async { [weak self] in
-            if let data = try? Data(contentsOf: url), let image = UIImage(data: data) {
-                DispatchQueue.main.async {
-                    self?.image = image
-                }
-            }
+            imageView.kf.setImage(with: url, placeholder: UIImage(named: "placeholder"))
         }
     }
 }
