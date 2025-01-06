@@ -23,47 +23,60 @@ final class MainViewController: UIViewController {
         return collectionView
     }()
     
-    // MARK: - UI Components
     private let pokemonBallImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "pokemonBall") // pokemonBall 이미지를 설정하세요.
-        imageView.contentMode = .scaleAspectFit // 이미지 비율 유지
+        imageView.contentMode = .scaleAspectFit
         return imageView
+    }()
+    
+    private let loadingIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .large)
+        indicator.color = .white
+        indicator.hidesWhenStopped = true
+        return indicator
     }()
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // 배경색을 빨간색으로 설정
         view.backgroundColor = UIColor.mainRed
         
         setupUI()
         bindViewModel()
+        
+        // 로딩 화면 시작
+        loadingIndicator.startAnimating()
         viewModel.fetchPokemonListTrigger.onNext(())
     }
     
     private func setupUI() {
-        // pokemonBallImageView를 view에 추가
         view.addSubview(pokemonBallImageView)
+        view.addSubview(collectionView)
+        view.addSubview(loadingIndicator)
         
-        // Auto Layout 설정
         pokemonBallImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            pokemonBallImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10), // 상단 여백
-            pokemonBallImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor), // 가로 중앙
-            pokemonBallImageView.widthAnchor.constraint(equalToConstant: 100), // 이미지 크기 설정
-            pokemonBallImageView.heightAnchor.constraint(equalToConstant: 100) // 이미지 크기 설정
+            pokemonBallImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            pokemonBallImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            pokemonBallImageView.widthAnchor.constraint(equalToConstant: 100),
+            pokemonBallImageView.heightAnchor.constraint(equalToConstant: 100)
         ])
         
-        // collectionView를 view에 추가
-        view.addSubview(collectionView)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: pokemonBallImageView.bottomAnchor, constant: 16), // pokemonBall 아래에 위치
+            collectionView.topAnchor.constraint(equalTo: pokemonBallImageView.bottomAnchor, constant: 16),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+        
+        // 로딩 인디케이터 레이아웃 설정
+        loadingIndicator.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            loadingIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            loadingIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
     }
     
@@ -71,8 +84,7 @@ final class MainViewController: UIViewController {
         // 기존 데이터 바인딩
         viewModel.pokemonList
             .bind(to: collectionView.rx.items(cellIdentifier: PokemonCollectionViewCell.identifier, cellType: PokemonCollectionViewCell.self)) { index, pokemon, cell in
-                // 셀에 데이터를 전달
-                cell.configure(with: pokemon, id: index + 1)  // 'pokemon.koreanName'을 표시할 수 있도록
+                cell.configure(with: pokemon, id: index + 1)
             }
             .disposed(by: disposeBag)
         
@@ -82,7 +94,7 @@ final class MainViewController: UIViewController {
                 guard let self = self else { return false }
                 let contentHeight = self.collectionView.contentSize.height
                 let frameHeight = self.collectionView.frame.size.height
-                return offset.y > contentHeight - frameHeight - 100 // 바닥 근처에서 트리거
+                return offset.y > contentHeight - frameHeight - 100
             }
             .distinctUntilChanged()
             .subscribe(onNext: { [weak self] _ in
@@ -104,6 +116,14 @@ final class MainViewController: UIViewController {
                         print("Error loading details: \(error.localizedDescription)")
                     })
                     .disposed(by: self.disposeBag)
+            })
+            .disposed(by: disposeBag)
+        
+        // 이미지 로딩이 완료되면 로딩 인디케이터를 숨김
+        viewModel.pokemonList
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] _ in
+                self?.loadingIndicator.stopAnimating()
             })
             .disposed(by: disposeBag)
     }
